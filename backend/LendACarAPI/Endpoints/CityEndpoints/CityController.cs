@@ -17,5 +17,13 @@ namespace LendACarAPI.Endpoints.CityEndpoints
 
             return Ok(cities);
         }
+
+        [HttpPost("add")]
+        public async Task<ActionResult<City>> CreateCity([FromBody] City city,CancellationToken cancellationToken)
+        {
+            db.Cities.Add(city);
+            await db.SaveChangesAsync(cancellationToken);
+            return Created();
+        }
     }
 }

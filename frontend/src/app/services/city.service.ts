@@ -14,4 +14,8 @@ export class CityService {
   GetAllCities(){
     return this.http.get<City[]>(this.baseUrl + 'city/get')
   }
+  AddCity(model:City){
+    return this.http.post(this.baseUrl+'city/add',model);
+  }
+
 }
