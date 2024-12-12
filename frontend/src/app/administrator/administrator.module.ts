@@ -14,6 +14,8 @@ import { UserOverviewComponent } from './user-overview/user-overview.component';
 import {RegisterComponent} from './register-employee/register.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
+import { AdminCityOverviewComponent } from './admin-city-overview/admin-city-overview.component';
+import { AdminCountryOverviewComponent } from './admin-country-overview/admin-country-overview.component';
 
 
 
@@ -29,7 +31,9 @@ import { HomeComponent } from './home/home.component';
     UserOverviewComponent,
     RegisterComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    AdminCityOverviewComponent,
+    AdminCountryOverviewComponent
   ],
     imports: [
         CommonModule,
