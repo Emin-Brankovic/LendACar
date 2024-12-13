@@ -10,15 +10,16 @@ import {NgForm} from '@angular/forms';
 })
 export class AdminCountryOverviewComponent implements OnInit {
   ngOnInit(): void {
-      this.coutryService.getAllCountries().subscribe(countries => this.countries = countries);
+      this.countryService.getAllCountries().subscribe(countries => this.countries = countries);
   }
-  coutryService=inject(CountryService);
+  countryService=inject(CountryService);
   countries: Country[]=[];
-  conutry?:Country;
+  country:any;
+  editMode:boolean=false;
   @ViewChild('countryForm') countryForm?:NgForm;
 
   CreateCountry() {
-    this.coutryService.CreateCountry(this.countryForm?.value).subscribe({
+    this.countryService.CreateCountry(this.countryForm?.value).subscribe({
       next:_=>window.location.reload(),
       error:err=>console.log(err),
     })
@@ -27,13 +28,30 @@ export class AdminCountryOverviewComponent implements OnInit {
     console.log($event.target.value);
 
     if(window.confirm("Are you sure you want to remove this country ?")){
-        this.coutryService.RemoveCountry($event.target.value).subscribe({
+        this.countryService.RemoveCountry($event.target.value).subscribe({
           next:_=>window.location.reload(),
           error:err=>console.log(err),
         })
     }
     else
       return;
+  }
+
+  LoadCountry($event: any) {
+    console.log(this.countries[$event.target.value]);
+    this.country=this.countries[$event.target.value];
+    this.editMode=true;
+
+  }
+  EditCountry() {
+    console.log("Jel radi");
+    console.log(this.countryForm?.value);
+    this.countryService.UpdateCountry(this.countryForm?.value,this.country.id).subscribe({
+      next:_=>{
+        window.location.reload();
+        this.editMode=false; },
+      error:err=>console.log(err)
+    })
   }
 
 }

@@ -51,5 +51,21 @@ namespace LendACarAPI.Endpoints
             await db.SaveChangesAsync(cancellationToken);
             return Ok();
         }
+
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult> UpdateCountry([FromBody] Country country, int id,CancellationToken cancellationToken)
+        {
+            var searchCountry = await db.Countries
+                .Where(c => c.Id == id && !db.Countries.Any(other => other.Name == country.Name && other.Id != id))
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (searchCountry == null) return BadRequest();
+
+            searchCountry.Name = country.Name;
+            await db.SaveChangesAsync(cancellationToken);
+
+            return Ok();
+        }
+
     }
 }
