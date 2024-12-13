@@ -5,12 +5,13 @@
       <div class="container">
         <div class="row justify-content-evenly text-center">
           <div class="col-4" >
-            <form #countryForm="ngForm" (ngSubmit)="CreateCountry()">
+            <form #countryForm="ngForm">
               <div class="form-group mb-3">
                 <label for="name">Country Name</label>
-                <input type="text" id="name" class="form-control" name="name" required [ngModel]="conutry?.name" />
+                <input type="text" id="name" class="form-control" name="name" required [ngModel]="country?.name" />
               </div>
-              <button class="btn btn-outline-light btn-secondary my-3" type="submit">Add Country</button>
+              <button *ngIf="!editMode" (click)="CreateCountry()" class="btn btn-outline-light btn-secondary my-3" type="submit">Add Country</button>
+              <button *ngIf="editMode" (click)="EditCountry()" class="btn btn-outline-light btn-secondary my-3" >Update</button>
             </form>
           </div>
 
@@ -35,7 +36,7 @@
                     <tr *ngFor="let country of countries; let i=index">
                       <td>{{i+1}}</td>
                       <td>{{ country.name }}</td>
-                      <td><button class="btn btn-outline-light mx-1" >Edit</button>
+                      <td><button class="btn btn-outline-light mx-1" [value]="i" (click)="LoadCountry($event)" >Edit</button>
                         <button class="btn btn-outline-danger mx-1" [value]="country.id" (click)="removeCountry($event)">Delete</button></td>
                     </tr>
                     </tbody>

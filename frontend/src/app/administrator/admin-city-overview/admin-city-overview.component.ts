@@ -23,7 +23,8 @@ export class AdminCityOverviewComponent implements OnInit {
   countryService=inject(CountryService);
   cities:City[]=[];
   countries:Country[]=[];
-  city?:City;
+  city:any;
+  editMode:boolean=false;
   @ViewChild('cityForm') cityForm?:NgForm;
 
   CreateCity() {
@@ -41,5 +42,20 @@ export class AdminCityOverviewComponent implements OnInit {
         error:err=>console.log(err),
       })
     }
+  }
+
+  LoadCity($event: any) {
+    console.log(this.cities[$event.target.value]);
+    this.city=this.cities[$event.target.value];
+    this.editMode=true;
+  }
+
+  UpdateCity() {
+    console.log(this.cityForm?.value);
+    console.log(this.city.id);
+    this.cityService.UpdateCity(this.cityForm?.value,this.city.id).subscribe({
+      next:_ => {window.location.reload(); this.editMode=false; },
+      error:err=>console.log(err)
+    })
   }
 }

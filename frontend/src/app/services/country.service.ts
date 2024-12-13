@@ -19,4 +19,8 @@ export class CountryService {
   RemoveCountry(id:number){
     return this.http.delete(this.baseUrl+`country/remove/${id}`);
   }
+
+  UpdateCountry(model:Country, id:number){
+    return this.http.put(this.baseUrl+`country/update/${id}`,model);
+  }
 }

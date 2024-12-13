@@ -42,5 +42,26 @@ namespace LendACarAPI.Endpoints.CityEndpoints
             await db.SaveChangesAsync(cancellationToken);
             return Ok();
         }
+
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult> UpdateCity([FromBody] City city, int id, CancellationToken cancellationToken)
+        {
+            var cityExists = await db.Cities
+                .AnyAsync(c => c.Name == city.Name && c.CountryId == city.CountryId, cancellationToken);
+
+            if (cityExists) return BadRequest();
+
+            var searchCity=await db.Cities.FirstOrDefaultAsync(c=>c.Id == id,cancellationToken);
+
+            if (searchCity == null) return BadRequest();
+
+            searchCity.CountryId=city.CountryId;
+            searchCity.Name = city.Name;
+
+            await db.SaveChangesAsync(cancellationToken);
+
+            return Ok();
+        }
+
     }
 }

@@ -22,4 +22,7 @@ export class CityService {
     return this.http.delete(this.baseUrl+`city/remove/${id}`);
   }
 
+  UpdateCity(model:City,id:number){
+    return this.http.put(this.baseUrl+`city/update/${id}`,model);
+  }
 }
