@@ -23,4 +23,17 @@ export class AdminCountryOverviewComponent implements OnInit {
       error:err=>console.log(err),
     })
   }
+  removeCountry($event:any){
+    console.log($event.target.value);
+
+    if(window.confirm("Are you sure you want to remove this country ?")){
+        this.coutryService.RemoveCountry($event.target.value).subscribe({
+          next:_=>window.location.reload(),
+          error:err=>console.log(err),
+        })
+    }
+    else
+      return;
+  }
+
 }

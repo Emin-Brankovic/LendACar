@@ -18,4 +18,8 @@ export class CityService {
     return this.http.post(this.baseUrl+'city/add',model);
   }
 
+  RemoveCity(id:number){
+    return this.http.delete(this.baseUrl+`city/remove/${id}`);
+  }
+
 }
