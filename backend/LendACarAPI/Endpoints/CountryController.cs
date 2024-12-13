@@ -23,10 +23,33 @@ namespace LendACarAPI.Endpoints
         [HttpPost("create")]
         public async Task<ActionResult> CreateCountry([FromBody] Country country,CancellationToken cancellationToken)
         {
+            var searchCountry = db.Countries
+                .FirstOrDefault(c => c.Name == country.Name);
+            if (searchCountry != null) return BadRequest();
+
             db.Countries.Add(country);
             await db.SaveChangesAsync(cancellationToken);
 
             return Created();
+        }
+
+        [HttpDelete("remove/{id}")]
+        public async Task<ActionResult> RemoveCountry([FromRoute] int id, CancellationToken cancellationToken)
+        {
+            var country = await db.Countries.FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+            if (country == null) return BadRequest();
+
+            var cities=await db.Cities
+                .Where(c=>c.CountryId== id)
+                .ToArrayAsync();
+
+
+            db.RemoveRange(cities);
+            //await db.SaveChangesAsync(cancellationToken);
+
+            db.Remove(country);
+            await db.SaveChangesAsync(cancellationToken);
+            return Ok();
         }
     }
 }

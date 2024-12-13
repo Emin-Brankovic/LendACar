@@ -46,7 +46,7 @@
                       <td>{{ city.country.name }}</td>
                       <td>{{ city.name }}</td>
                       <td><button class="btn btn-outline-light mx-1">Edit</button>
-                        <button class="btn btn-outline-danger mx-1">Delete</button></td>
+                        <button class="btn btn-outline-danger mx-1" [value]="city.id" (click)="removeCity($event)">Delete</button></td>
                     </tr>
                     </tbody>
                   </table>

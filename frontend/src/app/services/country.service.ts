@@ -15,4 +15,8 @@ export class CountryService {
   CreateCountry(model:Country){
     return this.http.post(this.baseUrl+'country/create',model);
   }
+
+  RemoveCountry(id:number){
+    return this.http.delete(this.baseUrl+`country/remove/${id}`);
+  }
 }

@@ -33,4 +33,13 @@ export class AdminCityOverviewComponent implements OnInit {
         error:err=>console.log(err),
       })
   }
+
+  removeCity($event:any){
+    if(window.confirm('Are you sure you want to remove this city?')){
+      this.cityService.RemoveCity($event.target.value).subscribe({
+        next: _ => {window.location.reload();},
+        error:err=>console.log(err),
+      })
+    }
+  }
 }

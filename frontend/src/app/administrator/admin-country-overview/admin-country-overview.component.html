@@ -35,8 +35,8 @@
                     <tr *ngFor="let country of countries; let i=index">
                       <td>{{i+1}}</td>
                       <td>{{ country.name }}</td>
-                      <td><button class="btn btn-outline-light mx-1">Edit</button>
-                        <button class="btn btn-outline-danger mx-1">Delete</button></td>
+                      <td><button class="btn btn-outline-light mx-1" >Edit</button>
+                        <button class="btn btn-outline-danger mx-1" [value]="country.id" (click)="removeCountry($event)">Delete</button></td>
                     </tr>
                     </tbody>
                   </table>
