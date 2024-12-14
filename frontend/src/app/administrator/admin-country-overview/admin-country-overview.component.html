@@ -1,0 +1,53 @@
+<section class="intro">
+  <h2 class="text-center my-3">Country Overview</h2>
+  <div class="bg-image h-100" >
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-evenly text-center">
+          <div class="col-4" >
+            <form #countryForm="ngForm">
+              <div class="form-group mb-3">
+                <label for="name">Country Name</label>
+                <input type="text" id="name" class="form-control" name="name" required [ngModel]="country?.name" />
+              </div>
+              <button *ngIf="!editMode" (click)="CreateCountry()" class="btn btn-outline-light btn-secondary my-3" type="submit">Add Country</button>
+              <button *ngIf="editMode" (click)="EditCountry()" class="btn btn-outline-light btn-secondary my-3" >Update</button>
+            </form>
+          </div>
+
+          <div class="col-5">
+            <!--<div class="container my-2">
+                          <input type="text" placeholder="Search employee" id="empSearch" style="width: 20%">
+                          <button class="btn btn-default btn-outline-light mx-3">Search</button>
+                        </div>-->
+            <div class="card">
+              <div class="card-body p-0">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
+                     style="position: relative">
+                  <table class="table table-striped mb-0">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let country of countries; let i=index">
+                      <td>{{i+1}}</td>
+                      <td>{{ country.name }}</td>
+                      <td><button class="btn btn-outline-light mx-1" [value]="i" (click)="LoadCountry($event)" >Edit</button>
+                        <button class="btn btn-outline-danger mx-1" [value]="country.id" (click)="removeCountry($event)">Delete</button></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

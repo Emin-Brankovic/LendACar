@@ -10,6 +10,8 @@ import { VehicleOverviewComponent } from './vehicle-overview/vehicle-overview.co
 import { UserOverviewComponent } from './user-overview/user-overview.component';
 import {RegisterComponent} from './register-employee/register.component';
 import {HomeComponent} from './home/home.component';
+import {AdminCityOverviewComponent} from './admin-city-overview/admin-city-overview.component';
+import {AdminCountryOverviewComponent} from './admin-country-overview/admin-country-overview.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login' ,pathMatch:'full'},
@@ -22,7 +24,9 @@ const routes: Routes = [
       {path:'employeeOverview',component: AdminEmployeeOverviewComponent},
       {path:'vehicleOverview',component: VehicleOverviewComponent},
       {path:'userOverview',component: UserOverviewComponent},
-      {path:'home',component: HomeComponent}
+      {path:'home',component: HomeComponent},
+      {path:'city',component:AdminCityOverviewComponent},
+      {path:'country',component:AdminCountryOverviewComponent}
     ]},
 
   {path:'register',component: RegisterComponent},

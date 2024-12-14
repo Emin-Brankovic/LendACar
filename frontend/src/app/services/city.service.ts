@@ -14,4 +14,15 @@ export class CityService {
   GetAllCities(){
     return this.http.get<City[]>(this.baseUrl + 'city/get')
   }
+  AddCity(model:City){
+    return this.http.post(this.baseUrl+'city/add',model);
+  }
+
+  RemoveCity(id:number){
+    return this.http.delete(this.baseUrl+`city/remove/${id}`);
+  }
+
+  UpdateCity(model:City,id:number){
+    return this.http.put(this.baseUrl+`city/update/${id}`,model);
+  }
 }
