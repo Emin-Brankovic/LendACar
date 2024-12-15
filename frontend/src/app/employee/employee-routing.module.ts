@@ -1,3 +1,4 @@
+import { VerificationRequestComponent } from './verification-request/verification-request.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from './login/login.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path:'dashboard', component: DashboardComponent},
   {path:'profileOverview', component: ProfileOverviewComponent},
   {path:'profileEdit',component:EditProfileComponent},
+  {path:'verificationRequests',component:VerificationRequestComponent},
 ];
 
 @NgModule({
