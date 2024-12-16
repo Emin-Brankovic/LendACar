@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileOverviewComponent } from './profile-overview/profile-overview.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { VerificationRequestComponent } from './verification-request/verification-request.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     DashboardComponent,
     ProfileOverviewComponent,
     EditProfileComponent,
+    VerificationRequestComponent,
   ],
   imports: [
     CommonModule,
