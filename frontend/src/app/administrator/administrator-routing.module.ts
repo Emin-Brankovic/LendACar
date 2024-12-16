@@ -26,7 +26,7 @@ const routes: Routes = [
       {path:'userOverview',component: UserOverviewComponent},
       {path:'home',component: HomeComponent},
       {path:'city',component:AdminCityOverviewComponent},
-      {path:'country',component:AdminCountryOverviewComponent}
+      {path:'country',component:AdminCountryOverviewComponent},
     ]},
 
   {path:'register',component: RegisterComponent},

@@ -162,39 +162,30 @@ namespace LendACarAPI.Endpoints{
             return Ok(new { message = "Succesfully deleted vehicle brand!" });
         }
 
-        [HttpPut("update/model")]
-        public async Task<IActionResult> UpdateModelById([FromBody] UpdateVehicleModelRequest request)
+        [HttpPut("update/vehicle")]
+        public async Task<IActionResult> UpdateModelById([FromBody] UpdateVehicleRequest request)
         {
             var vehicleModelToUpdate = await _context.VehicleModels
                 .FirstOrDefaultAsync(c => c.ModelName.ToUpper() == request.ModelName.ToUpper());
 
-            if(vehicleModelToUpdate == null)
+            var vehicleBrandToUpdate = await _context.VehicleBrands
+                .FirstOrDefaultAsync(c => c.BrandName.ToUpper() == request.BrandName.ToUpper());
+
+            if (vehicleModelToUpdate == null)
+            {
+                return NotFound(new { message = "Model not found, update aborted" });
+            }
+
+            if (vehicleBrandToUpdate == null)
             {
                 return NotFound(new { message = "Model not found, update aborted" });
             }
 
             vehicleModelToUpdate.ModelName = request.newModelName;
-            _context.SaveChangesAsync();
-
-            return Ok(new { message = "Update of vehicle model is successful!" });
-        }
-
-        [HttpPut("update/brand")]
-        public async Task<IActionResult> UpdateModelById([FromBody] UpdateVehicleBrandRequest request)
-        {   
-
-            var vehicleBrandToUpdate = await _context.VehicleBrands
-                .FirstOrDefaultAsync(c => c.BrandName.ToUpper() == request.BrandName.ToUpper());
-
-        if (vehicleBrandToUpdate == null)
-            {
-                return NotFound(new { message = "Model not found, update aborted" });
-            }
-
             vehicleBrandToUpdate.BrandName = request.newBrandName;
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Update of vehicle model is successful!" });
+            return Ok(new { message = "Update of vehicle is successful!" });
         }
     }
 

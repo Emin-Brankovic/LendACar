@@ -18,7 +18,6 @@ import { AdminCityOverviewComponent } from './admin-city-overview/admin-city-ove
 import { AdminCountryOverviewComponent } from './admin-country-overview/admin-country-overview.component';
 
 
-
 @NgModule({
   declarations: [
     AdminLoginComponent,
@@ -33,7 +32,7 @@ import { AdminCountryOverviewComponent } from './admin-country-overview/admin-co
     NavComponent,
     HomeComponent,
     AdminCityOverviewComponent,
-    AdminCountryOverviewComponent
+    AdminCountryOverviewComponent,
   ],
     imports: [
         CommonModule,

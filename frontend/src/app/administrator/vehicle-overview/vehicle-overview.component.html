@@ -1,7 +1,152 @@
 <body>
+<ng-container *ngIf="formIsClosed && updateFormIsClosed">
+<section>
+    <h2 class="text-center m-3">Vehicle Information</h2>
+    <div class="bg-image h-100" >
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <!--            <div class="container my-2">
+                            <input type="text" placeholder="Search employee" id="empSearch" style="width: 20%">
+                            <button class="btn btn-default btn-outline-light mx-3">Search</button>
+                          </div>-->
+              <div class="card">
+                <div class="card-body p-0">
+                  <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
+                       style="position: relative">
+                        <table class="table table-striped mb-0">
+                          <thead>
+                          <tr>
+                            <th>No.</th>
+                            <th>Id</th>
+                            <th>ModelName</th>
+                            <th>BrandName</th>
+                            <th>Actions</th>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let vehicle of vehicles; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{ vehicle.id }}</td>
+                            <td>{{ vehicle.modelName }}</td>
+                            <td>{{ vehicle.vehicleBrand.brandName }}</td>
+                            <td><button class="btn btn-warning m-2 p-1" style="width: 100px" (click)="editVehicle(vehicle)">Update</button><button style="width: 100px" class="btn btn-danger m-2 p-1" (click)="deleteVehicle(vehicle.id!)">Delete</button></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
 
+<ng-container *ngIf="!formIsClosed">
+  <div class="container w-25 mt-3 mb-3">
+    <form (ngSubmit)="submitVehicleForm()">
+      <!-- Vehicle Model Name Field -->
+      <div class="form-group mb-3">
+        <label for="vehicleModelName">Vehicle model name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="vehicleModelName"
+          [(ngModel)]="formVehicle.modelName"
+          name="vehicleModelName"
+          required
+        />
+      </div>
 
-    <div class="container d-flex align-items-center">
-        <button type="button" class="btn btn-primary btn-sm" routerLink="/admin/dashboard">Back</button>
+      <div class="form-group mb-3">
+        <label for="vehicleBrandName">Vehicle brand name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="vehicleBrandName"
+          [(ngModel)]="formVehicle.vehicleBrandName"
+          name="vehicleBrandName"
+          required
+        />
+      </div>
+
+      <!-- Submit and Cancel Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary buttonForm w-25">Submit</button>
+        <button type="button" (click)="cancelAddForm()" class="btn btn-danger buttonForm w-25">Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!updateFormIsClosed">
+  <div class="container w-25 mt-3 mb-3">
+    <form (ngSubmit)="submitUpdateForm()">
+      <!-- Vehicle Model Name Field -->
+      <div class="form-group mb-3">
+        <label for="updateModelName">Updating this vehicle model</label>
+        <input
+          type="text"
+          class="form-control text-secondary"
+          id="updateModelName"
+          [(ngModel)]="updateFormVehicle.updateModelName"
+          name="updateModelName"
+          required
+          readonly
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="newModelName">to this new vehicle model</label>
+        <input
+          type="text"
+          class="form-control"
+          id="newModelName"
+          [(ngModel)]="updateFormVehicle.newModelName"
+          name="newModelName"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="updateBrandName">Updating this vehicle brand</label>
+        <input
+          type="text"
+          class="form-control text-secondary"
+          id="updateBrandName"
+          [(ngModel)]="updateFormVehicle.updateBrandName"
+          name="updateBrandName"
+          required
+          readonly
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="newBrandName">to this new vehicle brand</label>
+        <input
+          type="text"
+          class="form-control"
+          id="newBrandName"
+          [(ngModel)]="updateFormVehicle.newBrandName"
+          name="newBrandName"
+          required
+        />
+      </div>
+
+      <!-- Submit and Cancel Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary buttonForm w-25">Submit</button>
+        <button type="button" (click)="cancelUpdateForm()" class="btn btn-danger buttonForm w-25">Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-container>
+
+<div class="container d-flex align-items-center mt-3" *ngIf="formIsClosed&&updateFormIsClosed">
+        <button type="button" class="btn btn-primary btn-sm p-2 m-2 w-25" routerLink="/admin/dashboard">Back</button>
+        <button type="button" class="btn btn-primary btn-sm p-2 m-2 w-25" (click)="openForm()">Add</button>
     </div>
 </body>
